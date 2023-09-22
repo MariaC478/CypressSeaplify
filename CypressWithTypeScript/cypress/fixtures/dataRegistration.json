@@ -1,6 +1,12 @@
 {
+    "email": "intern.maria.cotofrec@assist.ro",
+    "firstName": "JustAName",
+    "lastName": "JustAName",
+    "companyName": "JustAName",
+    "password": "JustAPassword1234!",
+
     "firstNameInvalid": "123",
     "lastNameInvalid": "123",
     "emailInvalid": "emailinvalid.com",
-    "passwordInvalid": "Invalid1234!"
+    "passwordInvalid": "Invalid1234"
 }

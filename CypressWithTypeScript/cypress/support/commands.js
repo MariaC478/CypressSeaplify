@@ -3,6 +3,17 @@
 import { faker } from "@faker-js/faker";
 // ***********************************************
 
+Cypress.Commands.add('loginProg', (email, password) => {
+  cy.fixture('dataLogin').then((dataLogin) => {
+    cy.request('POST', `${Cypress.env('login_api_url')}`, {
+      email: dataLogin.email,
+      password: dataLogin.password,
+    }).then((response) => {
+      window.localStorage.setItem('token', response.body.auth_token)
+    })
+  })
+});
+
 Cypress.Commands.add('customRegistrationBeforeEach', () => {
   beforeEach(() => {
     cy.fixture('dataRegistration').then(function (data) {
