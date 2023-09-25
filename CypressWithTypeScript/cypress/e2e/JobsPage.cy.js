@@ -2,7 +2,7 @@
 // ***********************************************
 import '../support/commands.js';
 import { faker } from "@faker-js/faker";
-import JobsPage from '../integration/PageObject/jobsPage.js'
+import JobsPage from '../integration/Getters/jobsPage.js'
 
 
 describe('Post a job with valid data ', () =>{
