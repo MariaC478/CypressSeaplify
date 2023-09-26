@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import {LoginPage} from '../Getters/loginPage.js';
+import LoginPage from '../Getters/loginPage.js';
 
 class LoginPageFunctions extends LoginPage {
     navigate() {
@@ -8,26 +8,37 @@ class LoginPageFunctions extends LoginPage {
     }
 
     typeEmail(email) {
-        LoginPage.getEmailInput()
+        this.getEmailInput()
             .type(email)
             .should("have.value", email);
     }
 
     typePassword(password) {
-        LoginPage.getPasswordInput()
+        this.getPasswordInput()
             .type(password)
             .should("have.value", password);
     }
 
     clickLoginButton() {
-        LoginPage.getLoginButton()
+        this.getLoginButton()
             .click();
     }
 
+    clickSignUpButton() {
+        this.getLinkToSignUp().click();
+    }
+
+    checkTheInvalidCredentialError() {
+        cy.wait(1500);
+        this.getInvalidCredentialsError()
+            .should('be.visible')
+            .contains("Invalid Email or Password");
+    }
+
     login(email, password) {
-        typeEmail(email);
-        typePassword(password);
-        clickLoginButton();
+        this.typeEmail(email);
+        this.typePassword(password);
+        this.clickLoginButton();
     }
 }
 

@@ -17,9 +17,9 @@ class LoginPage {
         return cy.get(".Toastify__toast-body");
     }
 
-    getLinkToLogin() {
+    getLinkToSignUp() {
         return cy.get(".secondary_100");
     }
 }
-
-export default new LoginPage();
+export default LoginPage;
+//module.exports = LoginPage;

@@ -32,4 +32,4 @@ class JobsPage {
     }
 }
 
-export default new JobsPage();
+export default JobsPage;

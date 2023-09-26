@@ -1,10 +1,6 @@
 /// <reference types="cypress" />
 
 class RegisterPage {
-    navigate() {
-        cy.visit("https://dev.seaplify.com/sign-up");
-    }
-
     getFirstNameInput() {
         return cy.get("input[name='firstName']");
     }
@@ -25,85 +21,51 @@ class RegisterPage {
         return cy.get("input[name='password']");
     }
 
-    getSignInButton() {
+    getSignUpButton() {
         return cy.get("button[type='submit'][data-cy='sign-up-button-submit']");
     }
 
-    getUpCornerError() {
-        return cy.get("div[role='alert']");
+    getInvalidCredentialsError() {
+        return cy.get(".Toastify__toast-body");
     }
 
     getPasswordError() {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(3) > small:nth-child(1)");
+        return cy.get("class='p-error block text-sm'")
+            .contains("Password is required",
+                "Password should be at least 8 characters long",
+                "The password should contain at least one uppercase",
+                "The password should contain at least one number",
+                "The password should contain at least one special character");
     }
 
-    getRequiredFirstNameError()
-    {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > small:nth-child(1)")
+    getFirstNameError() {
+        return cy.get(".helper-text")
+            .contains("Firstname is required",
+                "Firstname is not a valid name");
     }
 
-    getRequiredLastNameError()
-    {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > small:nth-child(1)")
+    getLastNameError() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Lastname is required",
+                "Lastname is not a valid name");
     }
 
-    getRequiredCompanyNameError()
-    {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > small:nth-child(1)")
+    getCompanyNameError() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Company name is required");
     }
 
-    getRequiredEmailError()
-    {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(3) > small:nth-child(1)")
+    getEmailError() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Email is required",
+                "This is not a valid email");
     }
 
-    getRequiredPasswordError()
-    {
-        return cy.get("body > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(3) > small:nth-child(1)")
-    }
-
-    getLinkToLogin() {
+    getLinkToSignIn() {
         return cy.get(".secondary_100");
-    }
-
-    register(firstName, lastName, companyName, email, password) {
-        this.getFirstNameInput()
-            .type(firstName)
-            .should('have.value', firstName);
-        this.getLastNameInput()
-            .type(lastName)
-            .should('have.value', lastName);
-        this.getCompanyInput()
-            .type(companyName)
-            .should('have.value', companyName);
-        this.getEmailInput()
-            .type(email)
-            .should('have.value', email);
-        this.getPasswordInput()
-            .type(password)
-            .should('have.value', password);
-        this.getSignInButton()
-            .click();
-    }
-
-    extremeValuesHandling(selectorFn) {
-        const validInputWithinLimit = 'a'.repeat(100);
-        const invalidInputBeyondLimit = 'a'.repeat(256);
-
-        selectorFn()
-            .type(validInputWithinLimit)
-            .should('have.value', validInputWithinLimit);
-
-        selectorFn()
-            .clear()
-            .type(invalidInputBeyondLimit.substr(0, 255))
-            .should('have.value', invalidInputBeyondLimit.substr(0, 255));
-
-        selectorFn()
-            .its('val')
-            .should('have.length', 255);
     }
 
 }
 
-export default new RegisterPage();
+export default RegisterPage;
+//module.exports = RegisterPage;
