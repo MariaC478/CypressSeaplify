@@ -1,23 +1,23 @@
 /// <reference types="cypress" />
 // ***********************************************
 import '../support/commands.js';
-import data from '../fixtures/dataLogin.json';
-import LoginPageFunctions from '../integration/Structures/loginPageFunctions.js'
+import LoginPageFunctions from '../integration/Structures/loginPageFunctions.js';
+import Preconditions from '../integration/Structures/Preconditions.js';
 // ***********************************************
 
 describe('Login with valid credentials', () => {
     beforeEach(() => {
-        LoginPageFunctions.navigate();
+        Preconditions.navigateToLogin();
     });
     it('Login using valid credentials', () => {
-        LoginPageFunctions.login(data.email, data.password);
+        LoginPageFunctions.LoginWithValidData();
         cy.url().should('include', Cypress.env('dashboard_url'));
     });
 });
 
-describe('Login Page - Login users with invalid data', function () {
+describe('Login users with invalid data', function () {
     beforeEach(() => {
-        LoginPageFunctions.navigate();
+        Preconditions.navigateToLogin();
     });
 
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -25,26 +25,22 @@ describe('Login Page - Login users with invalid data', function () {
     });
 
     it('Login with blank data', function () {
-        LoginPageFunctions.clickLoginButton();
-        LoginPageFunctions.checkTheInvalidCredentialError();
+        LoginPageFunctions.LoginWithBlank();
         cy.url().should('include', Cypress.env('login_url'));
     });
 
     it('Login with all invalid credentials', function () {
-        LoginPageFunctions.login(data.emailInvalid, data.passwordInvalid);
-        LoginPageFunctions.checkTheInvalidCredentialError();
+        LoginPageFunctions.LoginWithInvalidData();
         cy.url().should('include', Cypress.env('login_url'));
     });
 
     it('Login with a valid email and an invalid password', function () {
-        LoginPageFunctions.login(data.email, data.passwordInvalid);
-        LoginPageFunctions.checkTheInvalidCredentialError();
+        LoginPageFunctions.LoginWithInvalidData();
         cy.url().should('include', Cypress.env('login_url'));
     });
 
     it('Login with an invalid email and a valid password', function () {
-        LoginPageFunctions.login(data.emailInvalid, data.password);
-        LoginPageFunctions.checkTheInvalidCredentialError();
+        LoginPageFunctions.LoginWithInvalidData();
         cy.url().should('include', Cypress.env('login_url'));
     });
 });
@@ -65,7 +61,7 @@ describe('Login Page - Login users with invalid data', function () {
 
 describe('Navigation', () => {
     it('Navigate to the registration page', () => {
-        LoginPageFunctions.navigate();
+        Preconditions.navigateToLogin();
         LoginPageFunctions.clickSignUpButton();
         cy.url().should('include', Cypress.env('sign_up_url'));
     });

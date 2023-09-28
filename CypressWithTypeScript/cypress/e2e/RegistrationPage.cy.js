@@ -4,11 +4,13 @@ import '../support/commands.js';
 import data from '../fixtures/dataRegistration.json';
 import { faker } from "@faker-js/faker";
 import RegisterPageFunctions from '../integration/Structures/registerPageFunctions.js';
+import Preconditions from '../integration/Structures/Preconditions.js';
+
 // ***********************************************
 
 describe('Registration Page - Register users with valid data', function () {
   beforeEach(() => {
-    RegisterPageFunctions.navigate();
+    Preconditions.navigateToRegister();
   });
 
   it.skip('Registration with valid data', function () {
@@ -20,11 +22,11 @@ describe('Registration Page - Register users with valid data', function () {
 
 describe('Registration Page - Register users with invalid data', function () {
   beforeEach(() => {
-    RegisterPageFunctions.navigate();
+    Preconditions.navigateToRegister();
   });
 
   it('Registration with blank data', () => {
-    RegisterPageFunctions.getSignUpButton();
+    RegisterPageFunctions.clickSignUpButton();
     RegisterPageFunctions.checkFirstNameError();
     RegisterPageFunctions.checkLastNameError();
     RegisterPageFunctions.checkCompanyNameError();
@@ -46,9 +48,7 @@ describe('Registration Page - Register users with invalid data', function () {
 
   it('Registration with an already existing email', function () {
     RegisterPageFunctions.register(data.firstName, data.lastName, data.companyName, data.email, data.password);
-    RegisterPageFunctions.getUpCornerError()
-      .should('be.visible')
-      .contains("The resource you are trying to create already exists.");
+    RegisterPageFunctions.checkInvalidCredentialsError();
     cy.url().should('include', Cypress.env('sign_up_url'));
   });
 });
@@ -83,9 +83,8 @@ describe('Registration Page - Register users with invalid data', function () {
 
 describe('Navigation', () => {
   it('Navigate to the login page', () => {
-    RegisterPageFunctions.navigate();
-    RegisterPageFunctions.getLinkToLogin()
-      .click();
+    Preconditions.navigateToRegister();
+    RegisterPageFunctions.clickSignInButton();
     cy.url().should('include', Cypress.env('login_url'));
 
   });

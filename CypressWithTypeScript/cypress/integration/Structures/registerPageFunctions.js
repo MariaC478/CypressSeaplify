@@ -3,11 +3,6 @@
 import RegisterPage from '../Getters/registerPage.js';
 
 class RegisterPageFunctions extends RegisterPage {
-    navigate()
-    {
-        cy.visit("https://dev.seaplify.com/sign-up");
-    }
-
     typeFirstName(firstName) {
         this.getFirstNameInput()
             .type(firstName)
@@ -51,8 +46,7 @@ class RegisterPageFunctions extends RegisterPage {
     checkFirstNameError() {
         this.getFirstNameError()
             .should('be.visible')
-            .contains("Firstname is required",
-                "Firstname is not a valid name");
+            .contains("Firstname is required");
     }
 
     checkLastNameError() {
@@ -94,9 +88,8 @@ class RegisterPageFunctions extends RegisterPage {
                 "The resource you are trying to create already exists.");
     }
 
-
     register(firstName, lastName, companyName, email, password) {
-        this.typeCompanyName(firstName);
+        this.typeFirstName(firstName);
         this.typeLastName(lastName);
         this.typeCompanyName(companyName);
         this.typeEmail(email);

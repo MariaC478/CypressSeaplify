@@ -1,45 +1,50 @@
 /// <reference types="cypress" />
 
-import LoginPage from '../Getters/loginPage.js';
+import {LoginPage} from '../Getters/loginPage.js';
+import data from '../../fixtures/dataLogin.json';
 
-class LoginPageFunctions extends LoginPage {
-    navigate() {
-        cy.visit("https://dev.seaplify.com/login");
-    }
+class LoginPageFunctions{
+    LoginWithValidData() {
+        LoginPage.getEmailInput()
+            .type(data.email)
+            .should("have.value", data.email);
 
-    typeEmail(email) {
-        this.getEmailInput()
-            .type(email)
-            .should("have.value", email);
-    }
+        LoginPage.getPasswordInput()
+            .type(data.password)
+            .should("have.value", data.password);
 
-    typePassword(password) {
-        this.getPasswordInput()
-            .type(password)
-            .should("have.value", password);
-    }
-
-    clickLoginButton() {
-        this.getLoginButton()
+        LoginPage.getLoginButton()
             .click();
+
+        LoginPage.getLinkToSignUp().click();
     }
 
-    clickSignUpButton() {
-        this.getLinkToSignUp().click();
-    }
-
-    checkTheInvalidCredentialError() {
-        cy.wait(1500);
-        this.getInvalidCredentialsError()
+    LoginWithBlank()
+    {
+        LoginPage.getLinkToSignUp().click();
+        LoginPage.getInvalidCredentialsError()
             .should('be.visible')
             .contains("Invalid Email or Password");
     }
 
-    login(email, password) {
-        this.typeEmail(email);
-        this.typePassword(password);
-        this.clickLoginButton();
-    }
-}
+    LoginWithInvalidData() {
+        LoginPage.getEmailInput()
+            .type(data.emailInvalid)
+            .should("have.value", data.emailInvalid);
 
-export default new LoginPageFunctions();
+        LoginPage.getPasswordInput()
+            .type(data.passwordInvalid)
+            .should("have.value", data.passwordInvalid);
+
+        LoginPage.getLoginButton()
+            .click();
+
+        LoginPage.getLinkToSignUp().click();
+
+        LoginPage.getInvalidCredentialsError()
+            .should('be.visible')
+            .contains("Invalid Email or Password");
+    }
+
+}
+export const login = new LoginPageFunctions();

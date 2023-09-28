@@ -40,8 +40,8 @@ class RegisterPage {
 
     getFirstNameError() {
         return cy.get(".helper-text")
-            .contains("Firstname is required",
-                "Firstname is not a valid name");
+            .contains("Firstname is required"
+                );
     }
 
     getLastNameError() {
