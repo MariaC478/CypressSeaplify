@@ -1,119 +1,124 @@
 /// <reference types="cypress" />
 
-import RegisterPage from '../Getters/registerPage.js';
+import { registerImport } from '../Getters/registerPage.js';
+import data from '../../fixtures/dataRegistration.json';
 
-class RegisterPageFunctions extends RegisterPage {
-    typeFirstName(firstName) {
-        this.getFirstNameInput()
-            .type(firstName)
-            .should('have.value', firstName);
-    }
+class RegisterPageFunctions {
 
-    typeLastName(lastName) {
-        this.getLastNameInput()
-            .type(lastName)
-            .should('have.value', lastName);
-    }
-
-    typeCompanyName(companyName) {
-        this.getCompanyInput()
-            .type(companyName)
-            .should('have.value', companyName);
-    }
-
-    typeEmail(email) {
-        this.getEmailInput()
-            .type(email)
-            .should('have.value', email);
-    }
-
-    typePassword(password) {
-        this.getPasswordInput()
-            .type(password)
-            .should('have.value', password);
-    }
-
-    clickSignUpButton() {
-        this.getSignUpButton()
+    RegisterWithValidData() {
+        registerImport.FirstNameInput
+            .type(data.firstName)
+            .should('have.value', data.firstName);
+        registerImport.LastNameInput
+            .type(data.lastName)
+            .should('have.value', data.lastName);
+        registerImport.CompanyInput
+            .type(data.companyName)
+            .should('have.value', data.companyName);
+        registerImport.EmailInput
+            .type(data.email)
+            .should('have.value', data.email);
+        registerImport.PasswordInput
+            .type(data.password)
+            .should('have.value', data.password);
+        registerImport.SignUpButton
+            .should('be.visible')
             .click();
+
+        //check
+        cy.url().should('include', Cypress.env('login_url'));
     }
 
-    clickSignInButton() {
-        this.getLinkToSignIn()
+    RegisterWithBlank() {
+        registerImport.SignUpButton
+            .should('be.visible')
             .click();
-    }
 
-    checkFirstNameError() {
-        this.getFirstNameError()
+        //check
+        registerImport.FirstNameErrorRequired
             .should('be.visible')
             .contains("Firstname is required");
-    }
-
-    checkLastNameError() {
-        this.getLastNameError()
+        registerImport.LastNameErrorRequired
             .should('be.visible')
-            .contains("Lastname is required",
-                "Lastname is not a valid name");
-    }
-
-    checkCompanyNameError() {
-        this.getCompanyNameError()
+            .contains("Lastname is required");
+        registerImport.CompanyNameErrorRequired
             .should('be.visible')
             .contains("Company name is required");
-    }
-
-    checkEmailError() {
-        this.getEmailError()
+        registerImport.EmailErrorRequired
             .should('be.visible')
-            .contains("Email is required",
-                "This is not a valid email");
-    }
-
-    checkPasswordError() {
-        this.getPasswordError()
+            .contains("Email is required");
+        registerImport.PasswordErrorRequired
             .should('be.visible')
-            .contains(
-                'Password is required',
-                'Password should be at least 8 characters long',
-                'The password should contain at least one uppercase',
-                'The password should contain at least one number',
-                'The password should contain at least one special character');
+            .contains("Password is required");
+        cy.url().should('include', Cypress.env('sign_up_url'));
     }
 
-    checkInvalidCredentialsError() {
-        this.getInvalidCredentialsError()
+    RegisterWithInvalidData() {
+        registerImport.FirstNameInput
+            .type(data.firstNameInvalid)
+            .should('have.value', data.firstNameInvalid);
+        registerImport.LastNameInput
+            .type(data.lastNameInvalid)
+            .should('have.value', data.lastNameInvalid);
+        registerImport.CompanyInput
+            .type(data.companyNameInvalid)
+            .should('have.value', data.companyNameInvalid);
+        registerImport.EmailInput
+            .type(data.emailInvalid)
+            .should('have.value', data.emailInvalid);
+        registerImport.PasswordInput
+            .type(data.passwordInvalid)
+            .should('have.value', data.passwordInvalid);
+        registerImport.SignUpButton
             .should('be.visible')
-            .contains(
-                "Invalid data provided. Please check the information and try again.",
-                "The resource you are trying to create already exists.");
+            .click();
+
+        //check
+        registerImport.FirstNameErrorNotValid
+            .should('be.visible')
+            .contains("Firstname is not a valid name");
+        registerImport.LastNameErrorNotValid
+            .should('be.visible')
+            .contains("Lastname is not a valid name");
+        registerImport.CompanyNameErrorNotValid
+            .should('be.visible')
+            .contains("Company name is not a valid name");
+        registerImport.EmailErrorNotValid
+            .should('be.visible')
+            .contains("This is not a valid email");
+        registerImport.PasswordErrorSpecialCharacter
+            .should('be.visible')
+            .contains("The password should contain at least one special character");
+        cy.url().should('include', Cypress.env('sign_up_url'));
+
     }
 
-    register(firstName, lastName, companyName, email, password) {
-        this.typeFirstName(firstName);
-        this.typeLastName(lastName);
-        this.typeCompanyName(companyName);
-        this.typeEmail(email);
-        this.typePassword(password);
-        this.clickSignUpButton();
+    RedirectToLogin() {
+        registerImport.LinkToSignIn
+            .should('be.visible')
+            .click();
+
+        //check
+        cy.url().should('include', Cypress.env('login_url'));
     }
 
-    extremeValuesHandling(selectorFn, minLimit, maxLimit, withInValue, beyondValue) {
-        const validInputWithinLimit = 'a'.repeat(withInValue);
-        const invalidInputBeyondLimit = 'a'.repeat(beyondValue);
+    // extremeValuesHandling(selectorFn, minLimit, maxLimit, withInValue, beyondValue) {
+    //     const validInputWithinLimit = 'a'.repeat(withInValue);
+    //     const invalidInputBeyondLimit = 'a'.repeat(beyondValue);
 
-        selectorFn()
-            .type(validInputWithinLimit)
-            .should('have.value', validInputWithinLimit);
+    //     selectorFn()
+    //         .type(validInputWithinLimit)
+    //         .should('have.value', validInputWithinLimit);
 
-        selectorFn()
-            .clear()
-            .type(invalidInputBeyondLimit.substr(minLimit, maxLimit))
-            .should('have.value', invalidInputBeyondLimit.substr(minLimit, maxLimit));
+    //     selectorFn()
+    //         .clear()
+    //         .type(invalidInputBeyondLimit.substr(minLimit, maxLimit))
+    //         .should('have.value', invalidInputBeyondLimit.substr(minLimit, maxLimit));
 
-        selectorFn()
-            .its('val')
-            .should('have.length', maxLimit);
-    }
+    //     selectorFn()
+    //         .its('val')
+    //         .should('have.length', maxLimit);
+    // }
 }
 
 export default new RegisterPageFunctions();

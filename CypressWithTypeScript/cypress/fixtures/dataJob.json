@@ -1,0 +1,22 @@
+{
+    "title": "Just a title for the job",
+    "category": "1",
+    "position": "1",
+    "nationalityOption": "2",
+    "typeOfVoyagePick" : "2",
+    "dayOfMonth": "14",
+    "vesselType": "23",
+    "vesselName": "Marauder",
+    "teu": "20791",
+    "mainEngine": "3",
+    "bhp": "32842",
+    "kw": "327924",
+    "vesselFlag": "27",
+    "yearBuild": "2003",
+    "gt": "327927",
+    "dwt": "327921",
+    "currency": "2",
+    "salaryFrom": "153",
+    "salaryTo": "328",
+    "countCandidates": "4"
+}

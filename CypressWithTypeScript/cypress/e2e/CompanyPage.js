@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 // ***********************************************
 import '../support/commands.js';
-import JobsPage from '../integration/Structures/jobsPageFunctions.js';
+import CompanyPage from '../integration/Structures/companyPageFunctions.js';
 import Preconditions from '../integration/Structures/Preconditions.js';
 // ***********************************************
 

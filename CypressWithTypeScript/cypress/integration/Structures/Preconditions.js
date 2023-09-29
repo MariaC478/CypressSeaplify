@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 import LoginPageFunctions from './loginPageFunctions.js';
-import data from '../../fixtures/dataLogin.json';
 
 class Preconditions {
     navigateToLogin() {
@@ -18,10 +17,14 @@ class Preconditions {
 
     loginAndNavigateToJobs() {
         this.navigateToLogin();
-        LoginPageFunctions.login(data.email,data.password);
-        cy.wait(1500);
+        LoginPageFunctions.LoginWithValidData();
         cy.get("a[href='/jobs']").click();
-        cy.wait(3000);
+    }
+
+    loginAndNavigateToCompanyProfile() {
+        this.navigateToLogin();
+        LoginPageFunctions.LoginWithValidData();
+        cy.get("a[href='/company-profile']").click();
     }
 }
 

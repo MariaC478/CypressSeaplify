@@ -1,41 +1,45 @@
 /// <reference types="cypress" />
 
 class CompanyPage {
-    getWebsiteInput() {
+    get WebsiteInput() {
         return cy.get("data-cy='input-text-website'");
     }
 
-    getPrefixDropdown() {
+    get PrefixDropdown() {
         return cy.get("select[name='selectedPrefix']");
     }
 
-    getPhoneInput() {
+    get PhoneInput() {
         return cy.get("data-cy='input-phone-phone'");
     }
 
-    getDescriptionInput() {
+    get DescriptionInput() {
         return cy.get("data-cy='text-editor-description'");
     }
 
-    getStatementInput() {
+    get StatementInput() {
         return cy.get("data-cy='text-editor-mission_statement'");
     }
 
-    getJobTypesDrop() {
+    get JobTypesDrop() {
         return cy.get("data-cy='input-multiple-select-jobCategories'");
     }
 
-    getInvalidCredentialsError() {
+    get InvalidCredentialsError() {
         return cy.get();
     }
 
-    getFoundedInDropdown() {
+    get FoundedInDropdown() {
         return cy.get("data-cy='input-select-founded_in'");
     }
 
-    getLocationsDropdown() {
+    get LocationsDropdown() {
         return cy.get("data-cy='input-multiple-select-locations'");
+    }
+
+    get PublishButton(){
+        return cy.get(".sc-7c932303-0.fgigjA");
     }
 }
 
-export default CompanyPage;
+export const companyImport = new CompanyPage();

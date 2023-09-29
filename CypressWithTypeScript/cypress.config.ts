@@ -3,7 +3,7 @@ import { defineConfig } from "cypress";
 export default defineConfig({
   e2e: {
     baseUrl: 'https://dev.seaplify.com',
-    //defaultCommandTimeout: 5000,
+    defaultCommandTimeout: 5000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

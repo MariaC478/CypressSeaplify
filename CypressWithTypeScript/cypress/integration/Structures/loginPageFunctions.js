@@ -1,50 +1,70 @@
 /// <reference types="cypress" />
 
-import {LoginPage} from '../Getters/loginPage.js';
+import { loginImport } from '../Getters/loginPage.js';
 import data from '../../fixtures/dataLogin.json';
 
-class LoginPageFunctions{
+class LoginPageFunctions {
     LoginWithValidData() {
-        LoginPage.getEmailInput()
+        loginImport.EmailInput
             .type(data.email)
             .should("have.value", data.email);
-
-        LoginPage.getPasswordInput()
+        loginImport.PasswordInput
             .type(data.password)
             .should("have.value", data.password);
-
-        LoginPage.getLoginButton()
+        loginImport.LoginButton
+            .should('be.visible')
+            .click();
+        loginImport.LoginButton
+            .should('be.visible')
             .click();
 
-        LoginPage.getLinkToSignUp().click();
+        //check
+        cy.url().should('include', Cypress.env('dashboard_url'));
     }
 
-    LoginWithBlank()
-    {
-        LoginPage.getLinkToSignUp().click();
-        LoginPage.getInvalidCredentialsError()
+    LoginWithBlank() {
+        loginImport.LoginButton
+            .should('be.visible')
+            .click();
+
+        //check
+        loginImport.InvalidCredentialsError
             .should('be.visible')
             .contains("Invalid Email or Password");
+        cy.url().should('include', Cypress.env('login_url'));
+
     }
 
     LoginWithInvalidData() {
-        LoginPage.getEmailInput()
+        loginImport.EmailInput
             .type(data.emailInvalid)
             .should("have.value", data.emailInvalid);
-
-        LoginPage.getPasswordInput()
+        loginImport.PasswordInput
             .type(data.passwordInvalid)
             .should("have.value", data.passwordInvalid);
-
-        LoginPage.getLoginButton()
+        loginImport.LoginButton
+            .should('be.visible')
+            .click();
+        loginImport.LoginButton
+            .should('be.visible')
             .click();
 
-        LoginPage.getLinkToSignUp().click();
-
-        LoginPage.getInvalidCredentialsError()
+        //check
+        loginImport.InvalidCredentialsError
             .should('be.visible')
             .contains("Invalid Email or Password");
+        cy.url().should('include', Cypress.env('login_url'));
+
+    }
+
+    RedirectToRegister() {
+        loginImport.LinkToSignUp
+            .should('be.visible')
+            .click();
+
+        //check
+        cy.url().should('include', Cypress.env('sign_up_url'));
     }
 
 }
-export const login = new LoginPageFunctions();
+export default new LoginPageFunctions();

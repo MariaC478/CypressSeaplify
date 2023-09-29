@@ -2,132 +2,136 @@
 
 
 class JobsPage {
-    getNewJobButton() {
+    get NewJobButton() {
         return cy.get(".sc-7c932303-0.fgigjA");
     }
 
-    getPublishButton() {
+    get PublishButton() {
         return cy.get("button[class='sc-7c932303-0 fgigjA']").first();
     }
 
-    getCancelButton() {
+    get CancelButton() {
         return cy.get("button[class='sc-7c932303-0 bGcDlw']").first();
     }
 
-    getJobTitleInput() {
+    get JobTitleInput() {
         return cy.get("data-cy='input-text-title'");
     }
 
-    getJobCategoryDropDown() {
+    get JobCategoryDropDown() {
         return cy.get("select[name='jobCategory']");
     }
 
-    getJobPositionDropDown() {
+    get JobPositionDropDown() {
         return cy.get("select[name='position']");
     }
 
-    getGenerateWithAiButton() {
+    get GenerateWithAiButton() {
         return cy.get(".sc-7c932303-0.iKMKGB.mt-2.mr-auto");
     }
 
-    getNationalityWorldwide(){
+    get NationalityWorldwide(){
         return cy.get("input[name='worldwide']");
     }
 
-    getNationalityEUOnly(){
+    get NationalityEUOnly(){
         return cy.get("input[name='eu']");
     }
 
-    getNationalityCustom(){
+    get NationalityCustom(){
         return cy.get("input[name='acceptedNationalities']");
     }
 
-    getNationalitiesDropDown()
+    get NationalitiesDropDown()
     {
         return cy.get("div[class='p-multiselect p-component p-inputwrapper p-inputwrapper-focus w-full border-round-lg'] div[class='p-multiselect-label p-placeholder']");
     }
 
-    getAllNationalitiesCheckBox(){
+    get AllNationalitiesCheckBox(){
         return cy.get("div[role='checkbox'] div[class='p-checkbox-box']");
     }
 
-    getContractPermanent(){
+    get ContractPermanent(){
         return cy.get("input[name='permanent']");
     }
 
-    getContractTemporary(){
+    get ContractTemporary(){
         return cy.get("input[name='temporary']");
     }
 
-    getContractPerVoyage(){
+    get ContractPerVoyage(){
         return cy.get("input[name='perVoyage']");
     }
 
-    getSignOnDate() {
+    get SignOnDate() {
         return cy.get("input[name='signOnDate']");
     }
 
-    getVesselType() {
+    get SignOnDateNextMonth(){
+        return cy.get("button[class='p-datepicker-next']");
+    }
+
+    get VesselType() {
         return cy.get("select[name='vessel']");
     }
 
-    getVesselName() {
+    get VesselName() {
         return cy.get("input[name='vesselName']");
     }
 
-    getVesselTeu() {
+    get VesselTeu() {
         return cy.get("input[name='teu']");
     }
 
-    getVesselMainEngine() {
+    get VesselMainEngine() {
         return cy.get("select[name='vesselEngineType']");
     }
 
-    getVesselBph() {
+    get VesselBph() {
         return cy.get("input[name='bph']");
     }
 
-    getVesselKw() {
+    get VesselKw() {
         return cy.get("input[name='kw']");
     }
 
-    getVesselFlag() {
+    get VesselFlag() {
         return cy.get("select[name='vesselFlag']");
     }
 
-    getVesselYearBuild() {
+    get VesselYearBuild() {
         return cy.get("input[name='vesselYearBuild']");
     }
 
-    getVesselGt() {
+    get VesselGt() {
         return cy.get("input[name='gt']");
     }
 
-    getVesselDwt() {
+    get VesselDwt() {
         return cy.get("input[name='dwt']");
     }
 
-    getSalaryCurrency() {
+    get SalaryCurrency() {
         return cy.get("select[name='salaryCurrency']")
     }
 
-    getSalaryFrom() {
+    get SalaryFrom() {
         return cy.get("input[name='salaryFrom']");
     }
 
-    getSalaryTo() {
+    get SalaryTo() {
         return cy.get("input[name='salaryTo']");
     }
 
     //////min requirements 
 
-    getMultipleCandidates() {
+    get MultipleCandidates() {
         return cy.get("data-cy='checkbox-hiringMultiple'");
     }
 
-    getMultipleCandidatesCount() {
+    get MultipleCandidatesCount() {
         return cy.get("data-cy='input-number-hiringMultiple'");
     }
 }
 
-export default JobsPage;
+export const jobImport = new JobsPage();

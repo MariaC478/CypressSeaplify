@@ -1,25 +1,24 @@
 /// <reference types="cypress" />
 
 class LoginPage {
-    getEmailInput() {
+    get EmailInput() {
         return cy.get("input[name='email']");
     }
 
-    getPasswordInput() {
+    get PasswordInput() {
         return cy.get("input[name='password']");
     }
 
-    getLoginButton() {
+    get LoginButton() {
         return cy.get("button[type='submit'][data-cy='login-button-sign-in']");
     }
 
-    getInvalidCredentialsError() {
+    get InvalidCredentialsError() {
         return cy.get(".Toastify__toast-body");
     }
 
-    getLinkToSignUp() {
+    get LinkToSignUp() {
         return cy.get(".secondary_100");
     }
 }
-export default LoginPage;
-//module.exports = LoginPage;
+export const loginImport = new LoginPage();

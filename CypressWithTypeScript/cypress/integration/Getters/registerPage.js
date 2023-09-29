@@ -1,71 +1,103 @@
 /// <reference types="cypress" />
 
 class RegisterPage {
-    getFirstNameInput() {
+    get FirstNameInput() {
         return cy.get("input[name='firstName']");
     }
 
-    getLastNameInput() {
+    get LastNameInput() {
         return cy.get("input[name='lastName']");
     }
 
-    getCompanyInput() {
+    get CompanyInput() {
         return cy.get("input[name='companyName']");
     }
 
-    getEmailInput() {
+    get EmailInput() {
         return cy.get("input[placeholder='Type here'][name='email']");
     }
 
-    getPasswordInput() {
+    get PasswordInput() {
         return cy.get("input[name='password']");
     }
 
-    getSignUpButton() {
+    get SignUpButton() {
         return cy.get("button[type='submit'][data-cy='sign-up-button-submit']");
     }
 
-    getInvalidCredentialsError() {
+    get InvalidCredentialsError() {
         return cy.get(".Toastify__toast-body");
     }
 
-    getPasswordError() {
-        return cy.get("class='p-error block text-sm'")
-            .contains("Password is required",
-                "Password should be at least 8 characters long",
-                "The password should contain at least one uppercase",
-                "The password should contain at least one number",
-                "The password should contain at least one special character");
-    }
-
-    getFirstNameError() {
-        return cy.get(".helper-text")
-            .contains("Firstname is required"
-                );
-    }
-
-    getLastNameError() {
+    get PasswordErrorRequired() {
         return cy.get("small.p-error.block.text-sm")
-            .contains("Lastname is required",
-                "Lastname is not a valid name");
+            .contains("Password is required");
     }
 
-    getCompanyNameError() {
+    get PasswordErrorEightCharacters() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Password should be at least 8 characters long");
+    }
+
+    get PasswordErrorUppercase() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("The password should contain at least one uppercase");
+    }
+
+    get PasswordErrorOneNumber() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("The password should contain at least one number");
+    }
+
+    get PasswordErrorSpecialCharacter() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("The password should contain at least one special character");
+    }
+
+    get FirstNameErrorRequired() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Firstname is required");
+    }
+
+    get FirstNameErrorNotValid() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Firstname is not a valid name");
+    }
+
+    get LastNameErrorRequired() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Lastname is required");
+    }
+
+    get LastNameErrorNotValid() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Lastname is not a valid name");
+    }
+
+    get CompanyNameErrorRequired() {
         return cy.get("small.p-error.block.text-sm")
             .contains("Company name is required");
     }
 
-    getEmailError() {
+    get CompanyNameErrorNotValid() {
         return cy.get("small.p-error.block.text-sm")
-            .contains("Email is required",
-                "This is not a valid email");
+            .contains("Company name is not a valid name");
     }
 
-    getLinkToSignIn() {
+    get EmailErrorRequired() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("Email is required");
+    }
+
+    get EmailErrorNotValid() {
+        return cy.get("small.p-error.block.text-sm")
+            .contains("This is not a valid email");
+    }
+
+    get LinkToSignIn() {
         return cy.get(".secondary_100");
     }
 
 }
 
-export default RegisterPage;
-//module.exports = RegisterPage;
+export const registerImport = new RegisterPage();
