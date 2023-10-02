@@ -80,6 +80,12 @@ class JobsPageFunctions {
 
 
         //check
+        jobImport.ToastifyError
+        .should('be.visible')
+        .contains('You have successfully added a job');
+        cy.url().should('include', Cypress.env('jobs_url'));
+        cy.contains(data.title).first();
+
     }
 
 

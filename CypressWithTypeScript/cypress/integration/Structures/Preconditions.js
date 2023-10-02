@@ -11,6 +11,10 @@ class Preconditions {
         cy.visit("https://dev.seaplify.com/jobs");
     }
 
+    navigateToCompany() {
+        cy.visit("https://dev.seaplify.com/company-profile");
+    }
+
     navigateToRegister() {
         cy.visit("https://dev.seaplify.com/sign-up");
     }
@@ -18,13 +22,15 @@ class Preconditions {
     loginAndNavigateToJobs() {
         this.navigateToLogin();
         LoginPageFunctions.LoginWithValidData();
-        cy.get("a[href='/jobs']").click();
+        this.navigateToJobs();
+        //cy.get("a[href='/jobs']").click();
     }
 
     loginAndNavigateToCompanyProfile() {
         this.navigateToLogin();
         LoginPageFunctions.LoginWithValidData();
-        cy.get("a[href='/company-profile']").click();
+        this.navigateToCompany();
+        //cy.get("a[href='/company-profile']").click();
     }
 }
 

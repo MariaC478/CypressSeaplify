@@ -132,6 +132,10 @@ class JobsPage {
     get MultipleCandidatesCount() {
         return cy.get("data-cy='input-number-hiringMultiple'");
     }
+
+    get ToastifyError() {
+        return cy.get(".Toastify__toast-body");
+    }
 }
 
 export const jobImport = new JobsPage();

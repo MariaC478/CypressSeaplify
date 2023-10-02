@@ -9,11 +9,7 @@ describe('Post a job with valid data ', () =>{
     beforeEach(() => {
        Preconditions.loginAndNavigateToJobs();
     });
-    it('Post a job with only the required data', () => {
-        JobsPage.CreateAJob();
-    });
-
-    it('Post a job with all details', () => {
+    it('Post a job with valid data', () => {
         JobsPage.CreateAJob();
     });
 });

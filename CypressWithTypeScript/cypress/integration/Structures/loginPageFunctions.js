@@ -14,9 +14,6 @@ class LoginPageFunctions {
         loginImport.LoginButton
             .should('be.visible')
             .click();
-        loginImport.LoginButton
-            .should('be.visible')
-            .click();
 
         //check
         cy.url().should('include', Cypress.env('dashboard_url'));
@@ -42,9 +39,6 @@ class LoginPageFunctions {
         loginImport.PasswordInput
             .type(data.passwordInvalid)
             .should("have.value", data.passwordInvalid);
-        loginImport.LoginButton
-            .should('be.visible')
-            .click();
         loginImport.LoginButton
             .should('be.visible')
             .click();

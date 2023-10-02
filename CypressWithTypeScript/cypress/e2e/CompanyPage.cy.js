@@ -5,15 +5,11 @@ import CompanyPage from '../integration/Structures/companyPageFunctions.js';
 import Preconditions from '../integration/Structures/Preconditions.js';
 // ***********************************************
 
-describe('Post a job with valid data ', () =>{
+describe('Update a company with valid data ', () =>{
     beforeEach(() => {
-       Preconditions.loginAndNavigateToJobs();
+       Preconditions.loginAndNavigateToCompanyProfile();
     });
-    it('Post a job with only the required data', () => {
-        JobsPage.CreateAJob();
-    });
-
-    it('Post a job with all details', () => {
-        JobsPage.CreateAJob();
+    it('Update a company', () => {
+        CompanyPage.UpdateACompany();
     });
 });

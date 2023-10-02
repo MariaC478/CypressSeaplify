@@ -40,6 +40,10 @@ class CompanyPage {
     get PublishButton(){
         return cy.get(".sc-7c932303-0.fgigjA");
     }
+
+    get ToastifyError() {
+        return cy.get(".Toastify__toast-body");
+    }
 }
 
 export const companyImport = new CompanyPage();
