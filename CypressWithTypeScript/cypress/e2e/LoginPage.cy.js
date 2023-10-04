@@ -41,20 +41,6 @@ describe('Login users with invalid data', function () {
     });
 });
 
-// describe('Login Page - Limit Value Test', () => {
-//     beforeEach(() => {
-//         LoginPageFunctions.navigate();
-//     });
-
-//     it('should handle extreme values for email length', () => {
-//         LoginPageFunctions.extremeValuesHandling(() => LoginPageFunctions.getEmailInput());
-//     });
-
-//     it('should handle extreme values for password length', () => {
-//         LoginPageFunctions.extremeValuesHandling(() => LoginPageFunctions.getPasswordInput());
-//     });
-// });
-
 describe('Navigation', () => {
     it('Navigate to the registration page', () => {
         Preconditions.navigateToLogin();

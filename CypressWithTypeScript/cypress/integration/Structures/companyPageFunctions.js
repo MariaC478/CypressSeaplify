@@ -4,45 +4,71 @@ import { companyImport } from '../Getters/companyPage.js';
 import data from '../../fixtures/dataCompany.json';
 
 class CompanyPageFunctions {
-    UpdateACompany()
-    {
+    UpdateACompany() {
         companyImport.WebsiteInput
+            .click({ force: true })
+            .clear()
+
             .type(data.website)
             .should('have.value', data.website);
 
-            companyImport.PrefixDropdown
-            .select(data.prefixOption)
-            .should('have.value', data.prefixOption);
+        companyImport.PrefixDropdown
+            .click({ force: true })
+        companyImport.PrefixSearch
+            .type(data.prefixOption)
+        companyImport.PrefixFirstItemFromSearch
+            .click({ force: true });
 
-            companyImport.PhoneInput
+        companyImport.PhoneInput
+            .click({ force: true })
+            .clear()
             .type(data.phone)
             .should('have.value', data.phone);
 
-            companyImport.DescriptionInput
+        companyImport.DescriptionInput.clear();
+        companyImport.DescriptionInput
+            .click({ force: true })
             .type(data.description)
-            .should('have.value', data.description);
+        cy.wait(1000);
+        companyImport.DescriptionInputValue.should('contain', data.description);
 
-            companyImport.DescriptionInput
+
+        companyImport.StatementInput.clear();
+        companyImport.StatementInput
+            .click({ force: true })
             .type(data.missionStatement)
-            .should('have.value', data.missionStatement);
+        cy.wait(1000);
+        companyImport.StatementInputValue.should('contain', data.missionStatement);
 
-            companyImport.JobTypesDrop
-            .select(data.jobTypeOption)
-            .should('have.value', data.jobTypeOption);
+        companyImport.JobTypesDrop
+            .click({ force: true });
+        companyImport.JobTypesItems
+            .eq(data.jobTypeOption)
+            .click({ force: true });
 
-            companyImport.FoundedInDropdown
-            .select(data.foundedInOption)
-            .should('have.value', data.foundedInOption);
+            cy.wait(1000);
+        companyImport.FoundedInDropdown
+            .click({ force: true });
+        companyImport.FoundedItems
+            .eq(data.foundedInOption)
+            .click({ force: true });
 
-            companyImport.LocationsDropdown
-            .select(data.locationOption)
-            .should('have.value', data.locationOption);
+        companyImport.LocationsDropdown
+            .click({ force: true })
+        companyImport.LocationsSearch
+            .type(data.locationOption)
+        companyImport.LocationsFirstItemFromSearch
+            .click({ force: true });
 
-            companyImport.PublishButton
+        companyImport.UpdateButton
             .should('be.visible')
             .click();
 
-            //check
+        //check
+        companyImport.ToastifyError
+            .should('be.visible')
+            .contains('Company profile updated successfully');
+        cy.url().should('include', Cypress.env('company_profile_url'));
     }
 }
 export default new CompanyPageFunctions();

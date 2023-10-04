@@ -14,6 +14,7 @@ export default defineConfig({
     login_url: '/login',
     login_api_url: 'https://sailajob-be.azurewebsites.net/auth/login',
     dashboard_url: '/dashboard',
-    jobs_url: '/jobs'
+    jobs_url: '/jobs',
+    company_profile_url: '/company-profile'
   },
 });
