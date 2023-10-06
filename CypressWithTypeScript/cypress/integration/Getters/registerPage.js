@@ -1,6 +1,9 @@
 /// <reference types="cypress" />
 
 class RegisterPage {
+    get CompanyName() {
+        return cy.get("data-cy='input-text-name'");
+    }
     get FirstNameInput() {
         return cy.get("input[name='firstName']");
     }

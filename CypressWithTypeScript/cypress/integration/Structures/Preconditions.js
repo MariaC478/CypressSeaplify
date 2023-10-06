@@ -23,7 +23,6 @@ class Preconditions {
         this.navigateToLogin();
         LoginPageFunctions.LoginWithValidData();
         this.navigateToJobs();
-        //cy.get("a[href='/jobs']").click();
         cy.wait(3000);
     }
 
@@ -31,9 +30,14 @@ class Preconditions {
         this.navigateToLogin();
         LoginPageFunctions.LoginWithValidData();
         this.navigateToCompany();
-        //cy.get("a[href='/company-profile']").click();
         cy.wait(3000);
+    }
 
+    loginAfterRegisterAndNavigateToCompanyProfile() {
+        this.navigateToLogin();
+        LoginPageFunctions.LoginWithValidDataForRegister();
+        this.navigateToCompany();
+        cy.wait(3000);
     }
 }
 

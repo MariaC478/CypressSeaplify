@@ -2,6 +2,8 @@
 
 import { loginImport } from '../Getters/loginPage.js';
 import data from '../../fixtures/dataLogin.json';
+import dataRegister from '../../fixtures/dataRegistration.json';
+
 
 class LoginPageFunctions {
     LoginWithValidData() {
@@ -17,6 +19,21 @@ class LoginPageFunctions {
 
         //check
         cy.url().should('include', Cypress.env('dashboard_url'));
+    }
+
+    LoginWithValidDataForRegister() {
+        loginImport.EmailInput
+            .type(dataRegister.email)
+            .should("have.value", dataRegister.email);
+        loginImport.PasswordInput
+            .type(dataRegister.password)
+            .should("have.value", dataRegister.password);
+        loginImport.LoginButton
+            .should('be.visible')
+            .click();
+
+        //check
+        cy.url().should('include', "https://dev.seaplify.com/verification");
     }
 
     LoginWithBlank() {

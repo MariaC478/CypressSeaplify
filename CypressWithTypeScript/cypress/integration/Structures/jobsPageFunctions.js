@@ -18,13 +18,14 @@ class JobsPageFunctions {
 
         jobImport.JobCategoryDropDown.click({ force: true });
         jobImport.JobItems
-            .eq(data.category)
+            .eq(data.categoryId)
             .click({ force: true });
 
         jobImport.JobPositionDropDown
             .click({ force: true });
-        jobImport.JobItems
-            .eq(data.position)
+        jobImport.Search
+            .type(data.position, { force: true })
+        jobImport.FirstItemFromSearch
             .click({ force: true });
 
         cy.wait(1000);
@@ -43,10 +44,9 @@ class JobsPageFunctions {
         jobImport.VesselType
             .click({ force: true });
         cy.wait(1000);
-        jobImport.VesselSearch
+        jobImport.Search
             .click({ force: true })
             .type(data.vesselType, { force: true, delay: 10 })
-
         jobImport.FirstItemFromSearch
             .click({ force: true });
 
@@ -65,7 +65,7 @@ class JobsPageFunctions {
         jobImport.VesselMainEngine
             .click({ force: true });
         jobImport.JobItems
-            .eq(data.mainEngine)
+            .eq(data.mainEngineId)
             .click({ force: true });
 
         jobImport.VesselBph
@@ -82,7 +82,7 @@ class JobsPageFunctions {
 
         jobImport.VesselFlag
             .click({ force: true });
-        jobImport.VesselSearch
+        jobImport.Search
             .type(data.vesselFlag, { force: true })
         jobImport.FirstItemFromSearch
             .click({ force: true });
@@ -108,7 +108,7 @@ class JobsPageFunctions {
         jobImport.SalaryCurrency
             .click({ force: true });
         jobImport.JobItems
-            .eq(data.currency)
+            .eq(data.currencyId)
             .click({ force: true });
 
         jobImport.SalaryFrom
@@ -120,8 +120,6 @@ class JobsPageFunctions {
             .click({ force: true })
             .clear()
             .type(data.salaryTo)
-
-        //min requirements 
 
         jobImport.MultipleCandidates
             .click({ force: true })
@@ -142,8 +140,85 @@ class JobsPageFunctions {
         jobImport.ToastifyError
             .should('be.visible')
             .contains('You have successfully added a job');
+        cy.wait(1000);
         cy.url().should('include', Cypress.env('jobs_url'));
+        cy.wait(1000);
         cy.contains(data.title).first();
+        cy.get(".job-title").first().click();
+
+        jobImport.JobTitleInput
+            .should('have.value', data.title);
+
+        jobImport.JobCategoryDropDownSelected.should('contain', data.categoryValue);
+        jobImport.JobPositionDropDownSelected.should('contain', data.position);
+        this.checkSignOnDate(data.dayOfMonth);
+
+
+        this.nationalityCheck();
+        this.typeOfVoyageCheck();
+
+        jobImport.TypeSelected
+        .should("contain", data.vesselType);
+
+        jobImport.VesselName
+            .should('have.value', data.vesselName);
+
+        jobImport.VesselTeu
+            .should('have.value', data.teu);
+
+        jobImport.VesselMainEngine
+            .click({ force: true });
+        cy.wait(1000);
+        jobImport.SelectedDropDownHighlighted
+            .should("have.attr", "aria-label", data.mainEngineValue);
+
+        jobImport.VesselBph
+            .should('have.value', data.bhp);
+
+        jobImport.VesselKw
+            .should('have.value', data.kw);
+
+        jobImport.VesselFlag
+            .click({ force: true });
+        cy.wait(1000);
+        jobImport.SelectedDropDownHighlighted
+            .should("have.attr", "aria-label", data.vesselFlag);
+
+        jobImport.VesselYearBuild
+            .should('have.value', data.yearBuild);
+
+        jobImport.VesselGt
+            .should('have.value', data.gt);
+
+        jobImport.VesselDwt
+            .should('have.value', data.dwt);
+
+        jobImport.SalaryCurrency
+            .click({ force: true });
+        cy.wait(1000);
+        jobImport.SelectedDropDownHighlighted
+            .should("have.attr", "aria-label", data.currencyValue);
+
+        jobImport.SalaryFrom
+            .should("have.attr", "aria-valuenow", data.salaryFrom);
+
+
+        jobImport.SalaryTo
+            .should("have.attr", "aria-valuenow", data.salaryTo);
+
+        jobImport.MultipleCandidates
+            .as('checkbox')
+            .invoke('is', ':checked')
+            .then(checked => {
+                if (checked) {
+                    jobImport.MultipleCandidatesCount
+                        .should('have.value',data.countCandidates);
+                }
+            });
+
+        jobImport.BackButton.click({ force: true });
+        jobImport.DeleteButtonFirst.click({ force: true });
+        jobImport.ConfirmDelete.click({ force: true });
 
     }
 
@@ -166,6 +241,23 @@ class JobsPageFunctions {
         else if (nationalityOption == 3) {
             jobImport.NationalityCustom
                 .check({ force: true })
+            this.selectAllNationalities();
+        }
+    }
+
+
+    nationalityCheck(nationalityOption) {
+        if (nationalityOption == 1) {
+            jobImport.NationalityWorldwide
+                .should('be.checked');
+        }
+        else if (nationalityOption == 2) {
+            jobImport.NationalityEUOnly
+                .should('be.checked');
+        }
+        else if (nationalityOption == 3) {
+            jobImport.NationalityCustom
+                .should('be.checked');
             this.selectAllNationalities();
         }
     }
@@ -193,6 +285,22 @@ class JobsPageFunctions {
         }
     }
 
+    typeOfVoyageCheck(voyageOption) {
+        if (voyageOption == 1) {
+            jobImport.ContractPermanent
+                .should('be.checked');
+        }
+        else if (voyageOption == 2) {
+            jobImport.ContractTemporary
+                .should('be.checked');
+        }
+        else if (voyageOption == 3) {
+            jobImport.ContractPerVoyage
+                .should('be.checked');
+        }
+    }
+
+
     selectSignOnDate(dayOfMonth) {
         cy.wait(1000);
         jobImport.SignOnDate
@@ -201,6 +309,13 @@ class JobsPageFunctions {
             .click({ force: true })
         cy.contains(dayOfMonth)
             .click({ force: true })
+    }
+
+    checkSignOnDate(dayOfMonth) {
+        cy.wait(1000);
+        jobImport.SignOnDate
+            .click({ force: true })
+        jobImport.DayHighlight.contains(dayOfMonth - 1);
     }
 
 }

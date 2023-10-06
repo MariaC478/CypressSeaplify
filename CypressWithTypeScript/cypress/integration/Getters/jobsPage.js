@@ -6,8 +6,18 @@ class JobsPage {
         return cy.get(".sc-7c932303-0.fgigjA");
     }
 
+    get DeleteButtonFirst() {
+        return cy.get(".pi.pi-trash").first();
+    }
+
+    get ConfirmDelete() {
+        return cy.get("button[type='submit']");
+    }
+    get BackButton() {
+        return cy.get(".pi.pi-arrow-left").first();
+    }
     get PublishButton() {
-        return cy.get("button[class='sc-7c932303-0 fgigjA']").first();
+        return cy.get("button[type='submit']").first();
     }
 
     get CancelButton() {
@@ -22,12 +32,20 @@ class JobsPage {
         return cy.get("[data-cy='input-select-jobCategory'] .p-dropdown-trigger");
     }
 
+    get JobCategoryDropDownSelected() {
+        return cy.get("div[data-cy='input-select-jobCategory'] .flex.gap-2.align-items-center");
+    }
+
     get JobItems() {
         return cy.get(".p-dropdown-item");
     }
 
     get JobPositionDropDown() {
         return cy.get("[data-cy='input-select-position'] .p-dropdown-trigger");
+    }
+
+    get JobPositionDropDownSelected() {
+        return cy.get("[data-cy='input-select-position'] div[class='flex gap-2 align-items-center']");
     }
 
     get GenerateWithAiButton() {
@@ -78,15 +96,27 @@ class JobsPage {
         return cy.get("button[class='p-datepicker-next']");
     }
 
+    get DayHighlight() {
+        return cy.get("span[class='p-highlight']");
+    }
+
     get VesselType() {
         return cy.get(".p-dropdown-label.p-inputtext.p-placeholder").eq(0);
+    }
+
+    get TypeSelected() {
+        return cy.get(".p-dropdown-label.p-inputtext");
+    }
+
+    get SelectedDropDownHighlighted() {
+        return cy.get(".p-dropdown-item.p-highlight");
     }
 
     get VesselFlag() {
         return cy.get(".p-dropdown.p-component.p-inputwrapper.w-full").eq(4);
     }
 
-    get VesselSearch() {
+    get Search() {
         return cy.get(".p-dropdown-filter.p-inputtext.p-component");
     }
 
@@ -137,8 +167,6 @@ class JobsPage {
     get SalaryTo() {
         return cy.get("input[name='salaryTo']");
     }
-
-    //////min requirements 
 
     get MultipleCandidates() {
         return cy.get("[data-cy='checkbox-hiringMultiple']");

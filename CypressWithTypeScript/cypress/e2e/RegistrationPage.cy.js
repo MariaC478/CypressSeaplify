@@ -7,17 +7,21 @@ import Preconditions from '../integration/Structures/Preconditions.js';
 
 describe('Register users with valid data', function () {
   beforeEach(() => {
+    cy.viewport(1920, 1080);
     Preconditions.navigateToRegister();
   });
 
   it.skip('Registration with valid data', function () {
     RegisterPageFunctions.RegisterWithValidData();
+    Preconditions.loginAfterRegisterAndNavigateToCompanyProfile();
+    RegisterPageFunctions.CheckCompanyNameIsRegistered();
   });
 });
 
 
 describe('Register users with invalid data', function () {
   beforeEach(() => {
+    cy.viewport(1920, 1080);
     Preconditions.navigateToRegister();
   });
 
@@ -36,6 +40,7 @@ describe('Register users with invalid data', function () {
 
 describe('Navigation', () => {
   it('Navigate to the login page', () => {
+    cy.viewport(1920, 1080);
     Preconditions.navigateToRegister();
     RegisterPageFunctions.RedirectToLogin();
   });

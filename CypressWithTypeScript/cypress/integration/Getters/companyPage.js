@@ -17,6 +17,10 @@ class CompanyPage {
         return cy.get(".p-dropdown-item").first();
     }
 
+    get PrefixSelected() {
+        return cy.get("div[class='p-dropdown p-component p-inputwrapper p-inputwrapper-filled w-full'] div[class='flex gap-2 align-items-center']").first();
+    }
+
     get PhoneInput() {
         return cy.get("[data-cy='input-phone-phone']");
     }
@@ -45,6 +49,18 @@ class CompanyPage {
         return cy.get(".p-checkbox.p-component");
     }
 
+    get JobTypeOffshore() {
+        return cy.get("[data-cy='delete-filter-Offshore']");
+    }
+
+    get JobTypeShoreBased() {
+        return cy.get("[data-cy='delete-filter-Shore Based']");
+    }
+
+    get JobTypeCommercial() {
+        return cy.get("[data-cy='delete-filter-Commercial']");
+    }
+
     get InvalidCredentialsError() {
         return cy.get();
     }
@@ -57,6 +73,9 @@ class CompanyPage {
         return cy.get(".p-dropdown-item");
     }
 
+    get FoundedValue() {
+        return cy.get("div[class='p-dropdown p-component p-inputwrapper p-inputwrapper-filled w-full w-6'] div[class='flex gap-2 align-items-center']");
+    }
     get LocationsDropdown() {
         return cy.get("[data-cy='input-multiple-select-locations'] .p-multiselect-trigger");
     }
@@ -67,6 +86,14 @@ class CompanyPage {
 
     get LocationsFirstItemFromSearch() {
         return cy.get(".p-multiselect-item").first();
+    }
+
+    get LocationSelected() {
+        return cy.get(".flex.gap-2.align-items-center").last();
+    }
+
+    get LocationHighlighted() {
+        return cy.get(".p-multiselect-item.p-highlight");
     }
 
     get UpdateButton() {

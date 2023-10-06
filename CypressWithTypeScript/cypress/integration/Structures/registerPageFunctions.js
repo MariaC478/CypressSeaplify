@@ -26,7 +26,7 @@ class RegisterPageFunctions {
             .click();
 
         //check
-        cy.url().should('include', Cypress.env('login_url'));
+        cy.url().should('include', "https://dev.seaplify.com/verification");
     }
 
     RegisterWithBlank() {
@@ -102,23 +102,9 @@ class RegisterPageFunctions {
         cy.url().should('include', Cypress.env('login_url'));
     }
 
-    // extremeValuesHandling(selectorFn, minLimit, maxLimit, withInValue, beyondValue) {
-    //     const validInputWithinLimit = 'a'.repeat(withInValue);
-    //     const invalidInputBeyondLimit = 'a'.repeat(beyondValue);
-
-    //     selectorFn()
-    //         .type(validInputWithinLimit)
-    //         .should('have.value', validInputWithinLimit);
-
-    //     selectorFn()
-    //         .clear()
-    //         .type(invalidInputBeyondLimit.substr(minLimit, maxLimit))
-    //         .should('have.value', invalidInputBeyondLimit.substr(minLimit, maxLimit));
-
-    //     selectorFn()
-    //         .its('val')
-    //         .should('have.length', maxLimit);
-    // }
+    CheckCompanyNameIsRegistered() {
+        registerImport.CompanyName.should('have.value', data.companyName);
+    }
 }
 
 export default new RegisterPageFunctions();

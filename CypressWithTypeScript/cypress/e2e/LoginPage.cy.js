@@ -7,6 +7,7 @@ import Preconditions from '../integration/Structures/Preconditions.js';
 
 describe('Login with valid credentials', () => {
     beforeEach(() => {
+        cy.viewport(1920, 1080);
         Preconditions.navigateToLogin();
     });
     it('Login using valid credentials', function () {
@@ -17,6 +18,7 @@ describe('Login with valid credentials', () => {
 
 describe('Login users with invalid data', function () {
     beforeEach(() => {
+        cy.viewport(1920, 1080);
         Preconditions.navigateToLogin();
     });
 
@@ -43,6 +45,7 @@ describe('Login users with invalid data', function () {
 
 describe('Navigation', () => {
     it('Navigate to the registration page', () => {
+        cy.viewport(1920, 1080);
         Preconditions.navigateToLogin();
         LoginPageFunctions.RedirectToRegister();
     });
